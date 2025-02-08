@@ -5,6 +5,7 @@ const cart = new CartModel();
 
 export const addToCart = async (req: Request, res: Response) => {
     const { product, quantity } = req.body;
+    // console.log(req);
     try {
         console.log(product,quantity) ;
         await cart.addProduct(product, quantity);
@@ -19,5 +20,6 @@ export const addToCart = async (req: Request, res: Response) => {
 };
 
 export const getCartState = (req: Request, res: Response) => {
+    // console.log(req);
     res.json(cart.getCartState());
 };

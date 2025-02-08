@@ -17,16 +17,24 @@ const cartModel_1 = __importDefault(require("../models/cartModel"));
 const cart = new cartModel_1.default();
 const addToCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { product, quantity } = req.body;
+    // console.log(req);
     try {
+        console.log(product, quantity);
         yield cart.addProduct(product, quantity);
         res.json(cart.getCartState());
     }
     catch (error) {
-        res.status(500).json({ error: error.message });
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
+        }
+        else {
+            res.status(500).json({ error: "An unknown error occurred" });
+        }
     }
 });
 exports.addToCart = addToCart;
 const getCartState = (req, res) => {
+    // console.log(req);
     res.json(cart.getCartState());
 };
 exports.getCartState = getCartState;
